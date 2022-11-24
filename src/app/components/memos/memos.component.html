@@ -1,0 +1,5 @@
+<app-memo 
+    *ngFor="let memo of memos" [
+    memo]="memo" 
+    (remove)="deleteMemoById(this.memo.id)" >
+</app-memo>
