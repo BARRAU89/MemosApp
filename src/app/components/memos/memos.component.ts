@@ -24,4 +24,8 @@ export class MemosComponent implements OnInit{
     this.memos.splice(index,1)
   }
 
+  addMemo (memo: Memo):void {
+    this.memos.push (memo)
+  }
+
 }
