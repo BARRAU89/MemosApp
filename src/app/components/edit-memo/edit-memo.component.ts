@@ -36,7 +36,7 @@ updateMessage(message: string):void {
 
 onApply() :void {
   console.log('Apply')
-  this.apply.emit(this.memo)
+  this.apply.emit({...this.memo})
 }
 
 onCancel() :void {
