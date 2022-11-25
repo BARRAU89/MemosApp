@@ -1,6 +1,4 @@
-<app-edit-memo (apply) = "addMemo($event)" ></app-edit-memo>
-<app-memo 
-    *ngFor="let memo of memos" 
-    [memo]="memo" 
-    (remove)="deleteMemoById(this.memo.id)" >
-</app-memo>
+<app-edit-memo></app-edit-memo>
+<app-memo
+    *ngFor="let memo of memos"
+    [memo]="memo"></app-memo>

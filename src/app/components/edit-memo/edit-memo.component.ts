@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { UiService } from 'src/app/services/ui.service';
 import { Memo } from 'src/data/memo';
 
 @Component({
@@ -8,10 +9,11 @@ import { Memo } from 'src/data/memo';
 })
 export class EditMemoComponent implements OnInit{
 public memo: Memo = new Memo (-1, '' , null, '', '')
-@Output() apply : EventEmitter <Memo> = new EventEmitter
+//@Output() apply : EventEmitter <Memo> = new EventEmitter
+private ui: UiService
 
-constructor () {
-
+constructor(ui: UiService) {
+  this.ui = ui
 }
 
 ngOnInit(): void {
@@ -35,14 +37,13 @@ updateMessage(message: string):void {
 }
 
 onApply() :void {
-  console.log('Apply')
-  this.apply.emit(
+  this.ui.addMemo(
     {
       ...this.memo,
       id: Math.random()
     }
   )
-    //lines 45-53 are exactly to the 'spread out' operator of line 41
+    //lines 45-53 are exactly to the 'spread out' operator of line 42
     // this.apply.emit(
     //   {
     //     id: this.memo.id,

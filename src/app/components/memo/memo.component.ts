@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UiService } from 'src/app/services/ui.service';
 import { Memo } from 'src/data/memo';
 
 @Component({
@@ -8,11 +9,12 @@ import { Memo } from 'src/data/memo';
 })
 export class MemoComponent implements OnInit {
   @Input() memo: Memo | null = null
-  @Output() remove: EventEmitter<undefined> = new EventEmitter
+  //@Output() remove:EventEmitter<undefined> = new EventEmitter
+  private ui: UiService
 
-  constructor () {
-    
-  }
+  constructor (ui: UiService) {
+    this.ui = ui
+  } 
 
   ngOnInit(): void {
   } 
@@ -22,7 +24,7 @@ export class MemoComponent implements OnInit {
       console.log ('No memo!')
     } else {
       // console.log('Delete '+ this.memo.id)
-      this.remove.emit()
+      this.ui.deleteMemoById(this.memo.id)
     }
 
 
