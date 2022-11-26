@@ -1,27 +1,11 @@
 {
-    "memos":[
-        {
-            "id": 0,
-            "sender": "sender 1",
-            "subject": "subject 1",
-            "time": "2022/11/22",
-            "message": "message 1"
-        },
-
-        {
-            "id": 2,
-            "sender": "sender 1",
-            "subject": "subject 1",
-            "time": "2022/11/22",
-            "message": "message 2"
-        },
-
-        {
-            "id": 3,
-            "sender": "sender 1",
-            "subject": "subject 1",
-            "time": "2022/11/22",
-            "message": "message 1"
-        }
-    ]
+  "memos": [
+    {
+      "id": 0.02244151274791384,
+      "message": "mesg 1",
+      "time": null,
+      "sender": "sender 1",
+      "subject": "subject 1"
+    }
+  ]
 }
