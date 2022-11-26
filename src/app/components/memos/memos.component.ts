@@ -12,6 +12,9 @@ export class MemosComponent implements OnInit{
 
   constructor(ui: UiService) {
     this.memos = ui.memos
+    ui
+      .whenMemosUpdated()
+      .subscribe(memos => this.memos = memos)
   }
 
   ngOnInit(): void {

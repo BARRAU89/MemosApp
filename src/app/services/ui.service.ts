@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Memo } from 'src/data/memo';
+import { HttpClient } from '@angular/common/http'
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiService {
   public memos: Memo [] = [
-    new Memo(0,'message 1', null, 'sender 1', 'subject 1'),
-    new Memo(1,'message 2', null, 'sender 2', 'subject 2'),
+    // new Memo(0,'message 1', null, 'sender 1', 'subject 1'),
+    // new Memo(1,'message 2', null, 'sender 2', 'subject 2'),
   ]
+  private memosSubject: Subject<Memo[]> = new Subject()
 
-  constructor() { }
+  constructor(http: HttpClient) { 
+    http
+    .get<Memo []>('http://localhost:3000/memos')
+    .subscribe(memos => {
+      console.log(memos)
+      this.memos = memos
+      this.memosSubject.next(this.memos)
+    })
+  }
 
 
   deleteMemoById (id:number) :void {
@@ -21,6 +32,10 @@ export class UiService {
 
   addMemo (memo: Memo):void {
     this.memos.push (memo)
+  }
+
+  whenMemosUpdated(): Observable<Memo[]> {
+    return this.memosSubject.asObservable()
   }
 
 

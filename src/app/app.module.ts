@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { MemoComponent } from './components/memo/memo.component';
 import { MemosComponent } from './components/memos/memos.component';
 import { EditMemoComponent } from './components/edit-memo/edit-memo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { EditMemoComponent } from './components/edit-memo/edit-memo.component';
     EditMemoComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
