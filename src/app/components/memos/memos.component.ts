@@ -16,7 +16,7 @@ export class MemosComponent implements OnInit, OnDestroy {
     this.memos = ui.memos
     this.memosSubscription = ui
       .whenMemosUpdated()
-      .subscribe(memos => this.memos = memos)
+      .subscribe(memos => this.memos = memos)   
   }
 
   ngOnInit(): void {
@@ -26,6 +26,12 @@ export class MemosComponent implements OnInit, OnDestroy {
 // Problem: The subscription will outlive the MemosComponent object, therefore the
 // function that is executed everytime the memos are updated will continue to try to 
 // access destroyed memory. 
+
+//subscribing -> executes the function when a certain event happens.
+//subscription -> listens for the event, and keeps a reference to the function that 
+//       shall be executed for each invocation of the event.  They need to be cleaned up
+//       when it no longer needed. 
+//unsubscribing -> cleans the subscription
 
   ngOnDestroy(): void {
     this.memosSubscription.unsubscribe()

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Memo } from 'src/data/memo';
 import { HttpClient } from '@angular/common/http'
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class UiService {
   updateMemos (): void {
     this.http
       .get<Memo []>('http://localhost:3000/memos')
+      .pipe(take(1)) // means that we are gonna take the function one time only and then unbusbscribe 
       .subscribe(memos => {
         console.log(memos)
         this.memos = memos
@@ -36,12 +37,14 @@ export class UiService {
     // this.memos.splice(index,1)
     this.http
       .delete(`http://localhost:3000/memos/${id}`)  //the `` allows to introduce the value of a variable 
-      .subscribe(() => this.updateMemos())         // inside of a string and consider the whole as a string
+      .pipe(take(1))                                // inside of a string and consider the whole as a string
+      .subscribe(() => this.updateMemos())         
   }
 
   addMemo (memo: Memo):void {
     this.http
       .post('http://localhost:3000/memos', memo)
+      .pipe(take(1))
       .subscribe (() => {this.updateMemos()})
     //this.memos.push (memo)
   }
