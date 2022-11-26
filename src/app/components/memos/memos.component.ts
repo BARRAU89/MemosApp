@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UiService } from 'src/app/services/ui.service';
 import { Memo } from 'src/data/memo';
 
@@ -7,18 +8,27 @@ import { Memo } from 'src/data/memo';
   templateUrl: './memos.component.html',
   styleUrls: ['./memos.component.css']
 })
-export class MemosComponent implements OnInit{
+export class MemosComponent implements OnInit, OnDestroy {
   public memos: Memo [] //= []
+  private memosSubscription: Subscription
 
   constructor(ui: UiService) {
     this.memos = ui.memos
-    ui
+    this.memosSubscription = ui
       .whenMemosUpdated()
       .subscribe(memos => this.memos = memos)
   }
 
   ngOnInit(): void {
     
+  }
+
+// Problem: The subscription will outlive the MemosComponent object, therefore the
+// function that is executed everytime the memos are updated will continue to try to 
+// access destroyed memory. 
+
+  ngOnDestroy(): void {
+    this.memosSubscription.unsubscribe()
   }
 
   // deleteMemoById (id:number) :void {
