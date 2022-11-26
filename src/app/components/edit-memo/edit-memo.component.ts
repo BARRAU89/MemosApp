@@ -40,7 +40,8 @@ onApply() :void {
   this.ui.addMemo(
     {
       ...this.memo,
-      id: Math.random()
+      id: Math.random(),
+      time: new Date()
     }
   )
     //lines 45-53 are exactly to the 'spread out' operator of line 42
